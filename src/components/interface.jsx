@@ -4,7 +4,7 @@ import { useState } from "react";
 import { events } from "@react-three/fiber";
 
 const Interface = ()=>{
-    const { animations, animationIndex, setAnimationIndex, setCharacterIndex} = useCharacterAnimations();
+    const { animations, animationIndex, setAnimationIndex, setCharacterIndex, words, alphabets} = useCharacterAnimations();
     const [value, setValue] = useState('')
 
     return (
@@ -31,26 +31,53 @@ const Interface = ()=>{
                     variant="filled" 
                     color="rgba(10, 10, 10, 1)"
                     onClick={()=> {
-                        for(let i of value)
-                        {
-                            if( /[a-z]/.test(i))
-                            setTimeout(()=>{setCharacterIndex(animations.indexOf(i))},1000)
+                        let i = 0;
+                        while (i<=value.length) {
+                          loop(i);
+                          i++
+                        }
+                        function loop(i){
+                          setTimeout(function(){
+                            if(i == value.length)
+                            {
+                              setAnimationIndex(0);
+                              setCharacterIndex(0);
+                            }
+                            else
+                            {
+                              if(/[a-zA-z]/.test(value[i]))
+                              setCharacterIndex(animations.indexOf(value[i]))
+                            }
+                          }, 800 * i)
                         }
                     }}
                     >Convert</Button>
             </Flex>
                    
         </Affix>
-
-        <Affix position={{ bottom: 200, left: 20 }}>
-        { animations.map((animation, index)=>(
+          
+        <Affix position={{ bottom: 350, left: 40 }}>
+        { words.map((word, index)=>(
                 <Button 
                 color="rgba(10, 10, 10, 1)"
-                key={animation} 
-                variant={index === animationIndex ? "filled" : "light" } 
-                onClick={()=> setAnimationIndex(index)}
+                key={word} 
+                variant="filled"
+                onClick={()=> setAnimationIndex(animations.indexOf(word))}
                 >
-                    {animation}
+                    {word}
+                </Button>
+        ))}
+        </Affix>
+
+        <Affix position={{ bottom: 200, left: 20 }}>
+        { alphabets.map((alphabet, index)=>(
+                <Button 
+                color="rgba(10, 10, 10, 1)"
+                key={alphabet} 
+                variant="light"
+                onClick={()=> setAnimationIndex(animations.indexOf(alphabet))}
+                >
+                    {alphabet}
                 </Button>
         ))}
         </Affix>

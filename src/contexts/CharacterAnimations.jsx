@@ -4,9 +4,11 @@ const CharacterAnimationsContext = createContext({});
 
 export const CharacterAnimationsProvider = (props) =>{
 
-    const [animationIndex, setAnimationIndex] = useState(0);
+    const [animationIndex, setAnimationIndex] = useState(2);
     const [animations, setAnimations] = useState([]);
-    const [characterIndex, setCharacterIndex] = useState(0)
+    const [characterIndex, setCharacterIndex] = useState(2)
+    const [words, setWords] = useState([])
+    const [alphabets, setAlphabets] = useState([])
 
 
     return <CharacterAnimationsContext.Provider value={{
@@ -15,7 +17,11 @@ export const CharacterAnimationsProvider = (props) =>{
             animations,
             setAnimations,
             characterIndex,
-            setCharacterIndex
+            setCharacterIndex,
+            words,
+            setWords,
+            alphabets,
+            setAlphabets,
     }} >
         {props.children}
     </CharacterAnimationsContext.Provider>

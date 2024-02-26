@@ -6,13 +6,33 @@ import * as THREE from 'three';
 const Instructor = (props) => {
   const group = useRef();
   const { nodes, materials, animations, scene } = useGLTF("src/assets/instructor.glb");
-  const {setAnimations, animationIndex, characterIndex} = useCharacterAnimations();
+  const {setAnimations, animationIndex, characterIndex, setWords, setAlphabets} = useCharacterAnimations();
   const { actions, names } = useAnimations(animations, group);
 
+  console.log(names)
+
+  let words = []
+  let alpabhets = []
+  for(let i of names)
+  {
+    if(i.length >1)
+    words.push(i);
+    else
+    alpabhets.push(i);
+  }
+
+  useEffect(()=>{
+    setAnimations(names)
+  },[names])
 
   useEffect(() =>{
-    setAnimations(names);
-  },[names]);
+    setAlphabets(alpabhets);
+  },[alpabhets]);
+
+
+  useEffect(()=>{
+    setWords(words)
+  },[words])
 
   useEffect(() => {
     actions[names[animationIndex]].reset().setDuration(1).play();
@@ -21,6 +41,8 @@ const Instructor = (props) => {
     }
   },[animationIndex]);
 
+
+  console.log(characterIndex)
   useEffect(() =>{
     actions[names[characterIndex]].reset().setDuration(1).play();
     return () =>{
