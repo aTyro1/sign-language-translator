@@ -1,4 +1,4 @@
-import { Affix, Button, Flex, Textarea} from "@mantine/core";
+import { Affix, Button, Flex, Textarea, ScrollArea} from "@mantine/core";
 import { useCharacterAnimations } from "../contexts/CharacterAnimations";
 import { useState } from "react";
 import { events } from "@react-three/fiber";
@@ -6,12 +6,18 @@ import { events } from "@react-three/fiber";
 const Interface = ()=>{
     const { animations, animationIndex, setAnimationIndex, setCharacterIndex, words, alphabets} = useCharacterAnimations();
     const [value, setValue] = useState('')
+    let operationPosition = {bottom : 600, left: 300}
+    if(window.innerHeight < 750)
+    {
+      operationPosition = {bottom: 500, left: 200}
+    }
+
 
     return (
 
         <>
 
-        <Affix position={{ bottom: 600, left: 300}}>
+        <Affix position={operationPosition}>
             <Flex
                 direction={{ base: 'column', sm: 'row' }}
                 gap={{ base: 'sm', sm: 'lg' }}
@@ -57,16 +63,20 @@ const Interface = ()=>{
         </Affix>
           
         <Affix position={{ bottom: 350, left: 40 }}>
+          <ScrollArea h={200} w={1200}p={20}>
         { words.map((word, index)=>(
                 <Button 
                 color="rgba(10, 10, 10, 1)"
                 key={word} 
                 variant="filled"
+                ml={10}
+                mt={10}
                 onClick={()=> setAnimationIndex(animations.indexOf(word))}
                 >
                     {word}
                 </Button>
         ))}
+        </ScrollArea>
         </Affix>
 
         <Affix position={{ bottom: 200, left: 20 }}>

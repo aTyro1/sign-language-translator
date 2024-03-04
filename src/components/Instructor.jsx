@@ -5,7 +5,7 @@ import * as THREE from 'three';
 
 const Instructor = (props) => {
   const group = useRef();
-  const { nodes, materials, animations, scene } = useGLTF("src/assets/instructor.glb");
+  const { nodes, materials, animations, scene } = useGLTF("src/assets/avatar.glb");
   const {setAnimations, animationIndex, characterIndex, setWords, setAlphabets} = useCharacterAnimations();
   const { actions, names } = useAnimations(animations, group);
 
@@ -940,6 +940,6 @@ const Instructor = (props) => {
 
 export default Instructor
 
-useGLTF.preload("src/assets/instructor.glb");
+useGLTF.preload("src/assets/avatar.glb");
 
 
