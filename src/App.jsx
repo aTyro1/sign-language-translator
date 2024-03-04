@@ -2,15 +2,26 @@ import Instructor from "./components/Instructor"
 import { OrbitControls, SoftShadows, Environment } from "@react-three/drei"
 import { Canvas, useFrame } from "@react-three/fiber"
 import Interface from "./components/interface"
-import { CharacterAnimationsProvider } from "./contexts/CharacterAnimations"
+import { CharacterAnimationsProvider, useCharacterAnimations } from "./contexts/CharacterAnimations"
+import ReactLoading from "react-loading";
+
 
 function App() {
   let instructorPosition = [1.6,-1.80,0]
   let instructorScale = 1.35
   let instructorRotation = [-0.189, 0.08, 0.085]
+  const { animations } = useCharacterAnimations();
+  if(window.innerHeight < 850)
+  {
+    instructorPosition = [1.80, -1.80, 0]
+  }
 
-  return (
+  console.log('we are checking the size of animations: '+ animations.length)
+  if(animations.length > 0)
+  {
+    return (
     <>
+     
     <Canvas shadows gl={{ antialias: false }} camera={{ position: [1, 0.5, 2.5], fov: 50 }}>
     <color attach="background" args={["#fdcb58"]} />
     <fog attach="fog" args={["#f0f0f0", 0, 20]} />
@@ -31,5 +42,18 @@ function App() {
   </>
   )
 }
-
+else
+{
+  return (
+    <div>
+    <ReactLoading
+                type="spinningBubbles"
+                color="#0000FF"
+                height={100}
+                width={50}
+            />
+    </div>
+  )
+}
+}
 export default App

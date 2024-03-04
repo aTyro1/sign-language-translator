@@ -7,9 +7,17 @@ const Interface = ()=>{
     const { animations, animationIndex, setAnimationIndex, setCharacterIndex, words, alphabets} = useCharacterAnimations();
     const [value, setValue] = useState('')
     let operationPosition = {bottom : 600, left: 300}
-    if(window.innerHeight < 750)
+    let wordsPosition = { bottom: 350, left: 40 }
+    let scrollHeight = 200
+    let scrollWeight = 1200
+    let alphabetsPositions = { bottom: 200, left: 20 }
+    if(window.innerHeight < 850)
     {
       operationPosition = {bottom: 500, left: 200}
+      wordsPosition = {bottom: 250, left: 40}
+      scrollHeight = 210
+      scrollWeight = 1000
+      alphabetsPositions = {bottom: 150, left: 10}
     }
 
 
@@ -62,8 +70,8 @@ const Interface = ()=>{
                    
         </Affix>
           
-        <Affix position={{ bottom: 350, left: 40 }}>
-          <ScrollArea h={200} w={1200}p={20}>
+        <Affix position={wordsPosition}>
+          <ScrollArea h= {scrollHeight} w={scrollWeight}p={20}>
         { words.map((word, index)=>(
                 <Button 
                 color="rgba(10, 10, 10, 1)"
@@ -79,7 +87,7 @@ const Interface = ()=>{
         </ScrollArea>
         </Affix>
 
-        <Affix position={{ bottom: 200, left: 20 }}>
+        <Affix position={alphabetsPositions}>
         { alphabets.map((alphabet, index)=>(
                 <Button 
                 color="rgba(10, 10, 10, 1)"
