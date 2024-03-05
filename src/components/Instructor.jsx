@@ -9,8 +9,6 @@ const Instructor = (props) => {
   const {setAnimations, animationIndex, characterIndex, setWords, setAlphabets} = useCharacterAnimations();
   const { actions, names } = useAnimations(animations, group);
 
-  console.log(names)
-
   let words = []
   let alpabhets = []
   for(let i of names)

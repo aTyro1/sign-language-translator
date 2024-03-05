@@ -15,11 +15,9 @@ function App() {
   {
     instructorPosition = [1.80, -1.80, 0]
   }
-
-  console.log('we are checking the size of animations: '+ animations.length)
-  if(animations.length > 0)
-  {
-    return (
+   
+  
+  return (
     <>
      
     <Canvas shadows gl={{ antialias: false }} camera={{ position: [1, 0.5, 2.5], fov: 50 }}>
@@ -42,18 +40,5 @@ function App() {
   </>
   )
 }
-else
-{
-  return (
-    <div>
-    <ReactLoading
-                type="spinningBubbles"
-                color="#0000FF"
-                height={100}
-                width={50}
-            />
-    </div>
-  )
-}
-}
+
 export default App

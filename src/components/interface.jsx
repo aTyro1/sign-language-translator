@@ -1,7 +1,8 @@
-import { Affix, Button, Flex, Textarea, ScrollArea} from "@mantine/core";
+import { Affix, Button, Flex, Textarea, ScrollArea, Loader} from "@mantine/core";
 import { useCharacterAnimations } from "../contexts/CharacterAnimations";
 import { useState } from "react";
 import { events } from "@react-three/fiber";
+import { ProgressBar } from "react-loader-spinner";
 
 const Interface = ()=>{
     const { animations, animationIndex, setAnimationIndex, setCharacterIndex, words, alphabets} = useCharacterAnimations();
@@ -19,10 +20,9 @@ const Interface = ()=>{
       scrollWeight = 1000
       alphabetsPositions = {bottom: 150, left: 10}
     }
-
-
-    return (
-
+    if(animations.length >0)
+    {
+      return (
         <>
 
         <Affix position={operationPosition}>
@@ -101,7 +101,21 @@ const Interface = ()=>{
         </Affix>
          </>
     );
-
+}
+else
+{
+  return (
+    <Affix position={{top: window.innerHeight/3, left:window.innerWidth/2.18}}>
+    <ProgressBar
+      visible={true}
+      height="150"
+      width="150"
+      color="#4fa94d"
+      ariaLabel="progress-bar-loading"
+    />
+    </Affix>
+  )
+}
 }
 
 export default Interface;
